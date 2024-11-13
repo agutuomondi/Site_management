@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Employees</h1>
+    <form action="/employees/add" method="POST">
+        <input type="text" name="name" placeholder="Employee Name" required>
+        <input type="number" name="salary" placeholder="Salary" required>
+        <input type="text" name="sector" placeholder="Sector" required>
+        <button type="submit">Add Employee</button>
+    </form>
+    <h2>Existing Employees</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Sector</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% employees.forEach(employee => { %>
+                <tr>
+                    <td><%= employee.id %></td>
+                    <td><%= employee.name %></td>
+                    <td><%= employee.salary %></td>
+                    <td><%= employee.sector %></td>
+                    <td>
+                        <form action="/employees/update/<%= employee.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="/employees/delete/<%= employee.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Site Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Sunpark Site Management System</h1>
+
+    <nav>
+        <button onclick="showMaterials()">Materials</button>
+        <button onclick="showPayments()">Payments</button>
+        <button onclick="showEmployees()">Employees</button>
+        <button onclick="showWorkProgress()">Work Progress</button>
+    </nav>
+
+    <div id="content">
+        <!-- Dynamic content will be injected here -->
+    </div>
+    
+    <script>
+        function showMaterials() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>Materials</h2>
+                <select id="materialsDropdown" onchange="showMaterialDetails(this.value)">
+                    <option value="">Select Material</option>
+                    <option value="orders">Orders Placed</option>
+                    <option value="received">Received Materials</option>
+                    <option value="used">Material Used</option>
+                    <option value="stock">Stock Balance</option>
+                </select>
+                <div id="materialDetails"></div>
+            `;
+        }
+
+        function showMaterialDetails(selection) {
+            const details = document.getElementById('materialDetails');
+            switch (selection) {
+                case 'orders':
+                    details.innerHTML = '<p>Details of orders placed.</p>'; // Fetch and display order data
+                    break;
+                case 'received':
+                    details.innerHTML = '<p>Details of received materials.</p>'; // Fetch and display received material data
+                    break;
+                case 'used':
+                    details.innerHTML = '<p>Details of materials used.</p>'; // Fetch and display used material data
+                    break;
+                case 'stock':
+                    details.innerHTML = '<p>Stock balance details.</p>'; // Fetch and display stock balance data
+                    break;
+                default:
+                    details.innerHTML = '';
+                    break;
+            }
+        }
+
+        function showPayments() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>Payment Records</h2>
+                <p>Details of work done, amount paid, payment balance, and full payment scope.</p>
+                <!-- Add payment records table here -->
+            `;
+        }
+
+        function showEmployees() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>Employee Directory</h2>
+                <p>List of employees by sector.</p>
+                <!-- Add employee records table here -->
+            `;
+        }
+
+        function showWorkProgress() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>Work Progress</h2>
+                <p>Update completed work and create new job folders.</p>
+                <!-- Add work progress section here -->
+            `;
+        }
+    </script>
+</body>
+</html>
+

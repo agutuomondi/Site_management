@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Progress</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Work Progress</h1>
+    <form action="/work-progress/add" method="POST">
+        <input type="text" name="job_name" placeholder="Job Name" required>
+        <input type="number" name="staff_id" placeholder="Staff ID" required>
+        <input type="text" name="status" placeholder="Status" required>
+        <button type="submit">Add Progress</button>
+    </form>
+    <h2>Existing Work Progress</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Job Name</th>
+                <th>Staff ID</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% workProgress.forEach(progress => { %>
+                <tr>
+                    <td><%= progress.id %></td>
+                    <td><%= progress.job_name %></td>
+                    <td><%= progress.staff_id %></td>
+                    <td><%= progress.status %></td>
+                    <td>
+                        <form action="/work-progress/update/<%= progress.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="/work-progress/delete/<%= progress.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

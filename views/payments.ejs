@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Payments</h1>
+    <form action="/payments/add" method="POST">
+        <input type="text" name="work_done" placeholder="Work Done" required>
+        <input type="number" name="amount_paid" placeholder="Amount Paid" required>
+        <input type="number" name="payment_balance" placeholder="Payment Balance" required>
+        <input type="text" name="work_scope" placeholder="Work Scope" required>
+        <button type="submit">Add Payment</button>
+    </form>
+    <h2>Existing Payments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Work Done</th>
+                <th>Amount Paid</th>
+                <th>Payment Balance</th>
+                <th>Work Scope</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% payments.forEach(payment => { %>
+                <tr>
+                    <td><%= payment.id %></td>
+                    <td><%= payment.work_done %></td>
+                    <td><%= payment.amount_paid %></td>
+                    <td><%= payment.payment_balance %></td>
+                    <td><%= payment.work_scope %></td>
+                    <td>
+                        <form action="/payments/update/<%= payment.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="/payments/delete/<%= payment.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

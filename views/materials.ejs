@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Materials</h1>
+    <form action="/materials/add" method="POST">
+        <input type="text" name="name" placeholder="Material Name" required>
+        <input type="text" name="supplier" placeholder="Supplier" required>
+        <input type="date" name="delivery_date" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <button type="submit">Add Material</button>
+    </form>
+    <h2>Existing Materials</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Supplier</th>
+                <th>Delivery Date</th>
+                <th>Quantity</th>
+                <th>Used Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% materials.forEach(material => { %>
+                <tr>
+                    <td><%= material.id %></td>
+                    <td><%= material.name %></td>
+                    <td><%= material.supplier %></td>
+                    <td><%= material.delivery_date.toISOString().split('T')[0] %></td>
+                    <td><%= material.quantity %></td>
+                    <td><%= material.used_quantity %></td>
+                    <td>
+                        <form action="/materials/update/<%= material.id %>" method="POST">
+                            <input type="number" name="quantity" placeholder="New Quantity" required>
+                            <input type="number" name="used_quantity" placeholder="Used Quantity" required>
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="/materials/delete/<%= material.id %>" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
